@@ -1,6 +1,6 @@
-import User from "../backend/models/User.js";
-import Seller from "../backend/models/Seller.js";
-import SellerDocuments from "../backend/models/SellerDocuments.js";
+import User from "./models/User.js";
+import Seller from "./models/Seller.js";
+import SellerDocuments from "./models/SellerDocuments.js";
 
 export const registerSeller = async (req, res) => {
   try {
