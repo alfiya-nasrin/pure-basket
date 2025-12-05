@@ -1,6 +1,6 @@
-import User from "../models/User.js";
-import Seller from "../models/Seller.js";
-import SellerDocuments from "../models/SellerDocuments.js";
+import User from "./models/User.js";
+import Seller from "./models/Seller.js";
+import SellerDocuments from "./models/SellerDocuments.js";
 
 export const registerSeller = async (req, res) => {
   try {
@@ -21,7 +21,7 @@ export const registerSeller = async (req, res) => {
 
       fssaiNumber,
       aadhaarNumber,
-      gstDocUrl
+      gstDocUrl,
     } = req.body;
 
     // basic validation
@@ -39,7 +39,9 @@ export const registerSeller = async (req, res) => {
       !fssaiNumber ||
       !aadhaarNumber
     ) {
-      return res.status(400).json({ message: "Please fill all required fields" });
+      return res
+        .status(400)
+        .json({ message: "Please fill all required fields" });
     }
 
     // check if user exists
@@ -60,7 +62,7 @@ export const registerSeller = async (req, res) => {
     // create seller profile
     const seller = await Seller.create({
       userId: newUser._id,
-      name: fullName,  // FIXED
+      name: fullName, // FIXED
       brandName,
       description,
       location,
@@ -90,7 +92,6 @@ export const registerSeller = async (req, res) => {
       sellerId: seller._id,
       documentsId: sellerDocs._id,
     });
-
   } catch (error) {
     console.error("Error registering seller:", error);
     return res.status(500).json({ message: "Server error" });

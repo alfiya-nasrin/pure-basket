@@ -4,22 +4,28 @@ dotenv.config();
 import express from "express";
 import { dbconnection } from "./config/db.js";
 import cookieParser from "cookie-parser";
-import cors from "cors"
+import cors from "cors";
+
+import sellerRoutes from "./backend/routes/sellerRoutes.js";
 
 const app = express();
 const PORT = 5000;
 
 // Middleware
 app.use(express.json());
-app.use(cookieParser())
-app.use(cors())
+app.use(cookieParser());
+app.use(cors());
 
 // Routes
+app.use("/api/sellers", sellerRoutes);
+
 app.get("/", (req, res) => {
   res.send("Backend running using ES6 import/export!");
 });
 
-dbconnection()
+// DB connection
+dbconnection();
+
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server started on http://localhost:${PORT}`);
